@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__notion__notion-search",
+      "mcp__notion__notion-fetch",
+      "mcp__notion__notion-update-page",
+      "WebFetch(domain:trump-shock-sim.lovable.app)",
+      "WebFetch(domain:www.yc.ac.kr)",
+      "WebSearch",
+      "Bash(npx create-next-app@latest:*)",
+      "Bash(npm install:*)",
+      "mcp__notion__notion-create-pages"
+    ]
+  },
+  "outputStyle": "Explanatory"
+}

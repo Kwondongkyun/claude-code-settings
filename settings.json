@@ -1,0 +1,146 @@
+{
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+    "CLAUDE_CODE_ENABLE_TELEMETRY": "1",
+    "OTEL_METRICS_EXPORTER": "otlp",
+    "OTEL_LOGS_EXPORTER": "otlp",
+    "OTEL_TRACES_EXPORTER": "otlp",
+    "OTEL_EXPORTER_OTLP_PROTOCOL": "grpc",
+    "OTEL_EXPORTER_OTLP_ENDPOINT": "http://43.201.162.58:4317",
+    "OTEL_METRIC_EXPORT_INTERVAL": "60000",
+    "OTEL_LOGS_EXPORT_INTERVAL": "5000",
+    "OTEL_SERVICE_NAME": "claude-code-eren.kwon",
+    "OTEL_METRICS_INCLUDE_SESSION_ID": "false"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(*)",
+      "WebSearch",
+      "mcp__playwright",
+      "mcp__pencil"
+    ],
+    "deny": [
+      "Bash(*rm -rf *)",
+      "Bash(*killall *)",
+      "Bash(*sudo *)",
+      "Bash(*git push --force*)",
+      "Bash(*npm publish*)",
+      "Bash(*dd *)",
+      "Bash(*mkfs *)",
+      "Bash(*shutdown*)",
+      "Bash(*reboot*)",
+      "Bash(*poweroff*)",
+      "Bash(*fdisk*)",
+      "Bash(*diskutil erase*)",
+      "Bash(*diskutil partitionDisk*)",
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./secrets/**)",
+      "Read(~/.ssh/**)"
+    ],
+    "ask": [
+      "Bash(*rm *)",
+      "Bash(*curl *)",
+      "Bash(*wget *)",
+      "Bash(*git push *)",
+      "Bash(*git reset --hard*)",
+      "Bash(*git clean -f*)",
+      "Bash(*pkill *)",
+      "Bash(*chmod *)",
+      "Bash(*chown *)",
+      "Bash(*ssh *)",
+      "Bash(*scp *)",
+      "Bash(*launchctl *)",
+      "Bash(*crontab *)"
+    ]
+  },
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/notify.sh Stops"
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/notify.sh Asks"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "AskUserQuestion",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/notify.sh Asks"
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/scripts/pre-compact-marker.sh",
+            "statusMessage": "compact 마커 생성..."
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/scripts/post-compact-reminder.sh"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/scripts/init-context-files.sh",
+            "statusMessage": "컨텍스트 파일 확인 중..."
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/statusline.sh"
+  },
+  "enabledPlugins": {
+    "ralph-loop@claude-plugins-official": true,
+    "context7@claude-plugins-official": true,
+    "github@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true,
+    "code-review@claude-plugins-official": true,
+    "security-guidance@claude-plugins-official": true,
+    "planning-with-files@planning-with-files": false
+  },
+  "language": "Korean",
+  "effortLevel": "medium",
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "@playwright/mcp@latest"
+      ]
+    }
+  },
+  "teammateMode": "auto"
+}
