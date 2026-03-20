@@ -13,15 +13,17 @@ Always respond in Korean (한국어).
 
 ## 프로젝트 생성 프로세스
 ```
-Phase 0: 브레인스토밍 → brainstorming 스킬
-Phase 1: 기획 → pm 에이전트 (PRD, 유저플로우, IA, 에러시나리오)
-Phase 2: 기획 검증 → spec-review 스킬
-Phase 3: UI 설계 → Pencil MCP
-Phase 4: 구현 계획 → writing-plans 스킬
-Phase 5: Foundation → Lead 직접 (프레임워크, DB, 인증)
-Phase 6: 병렬 개발 → 팀 에이전트 (worktree)
-Phase 7: 검증 루프 → reviewer + test + Playwright
-Phase 8: 기록 → docs/conversations/
+Phase 0:   브레인스토밍 → brainstorming 스킬
+Phase 1:   기획 → pm 에이전트 (PRD + RICE 우선순위, 유저플로우, 에러시나리오)
+Phase 2:   기획 검증 → /spec-review 커맨드
+Phase 2.5: 리스크 분석 → /pre-mortem 커맨드
+Phase 3:   UI 설계 → Pencil MCP
+Phase 4:   구현 계획 → writing-plans 스킬
+Phase 4.5: 테스트 계획 → /test-scenarios 커맨드
+Phase 5:   Foundation → Lead 직접 (프레임워크, DB, 인증, pm-dummy-dataset 시딩)
+Phase 6:   병렬 개발 → 팀 에이전트 (worktree)
+Phase 7:   검증 루프 → reviewer + test + Playwright (test-plan.md 기반)
+Phase 8:   기록 → docs/conversations/
 ```
 - 각 Phase는 독립적이며, Phase 전환 시 반드시 사용자에게 확인한다.
 - Phase 간 자동 호출 금지 (brainstorming→writing-plans, writing-plans→executing-plans 등).

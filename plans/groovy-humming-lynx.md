@@ -1,42 +1,40 @@
-# 비로그인 유저 아티클 제한 + 로그인 유도
+# Hacker News 완전 제거
 
 ## Context
-비로그인 유저에게 소스당 아티클 3개만 보여주고, 나머지는 블러 처리하여 로그인을 유도한다.
-홈 페이지(CategoryRow)와 카테고리 상세 페이지 두 곳에 적용.
+Hacker News 소스를 DB + 코드에서 완전 제거. maily/eopla 때와 동일한 패턴.
 
-## 수정 파일
+## Step 1: DB 정리 (Supabase에서 직접 실행)
 
-### Step 1: CategoryRow에 비로그인 제한 적용
-**수정** `src/components/feed/CategoryRow/index.tsx`
-- props에 `isLoggedIn: boolean` 추가
-- 비로그인 시 articles를 3개까지만 렌더링
-- 3개 이후에 **블러 카드 1개** 추가: ArticleCard와 동일 크기, blur + 오버레이
-  - "로그인하면 더 많은 글을 볼 수 있어요" + 로그인 버튼 (Link to `/login`)
-- 로그인 유저는 기존과 동일 (제한 없음)
+```sql
+-- 1. 북마크/읽음 기록 중 HN 아티클 참조 제거
+DELETE FROM bookmark WHERE article_id IN (SELECT id FROM article WHERE source_id IN (SELECT id FROM source WHERE type = 'hackernews'));
+DELETE FROM read_article WHERE article_id IN (SELECT id FROM article WHERE source_id IN (SELECT id FROM source WHERE type = 'hackernews'));
 
-### Step 2: 홈 페이지에서 isLoggedIn 전달
-**수정** `src/app/page.tsx`
-- `CategoryRow`에 `isLoggedIn={!!user}` prop 추가 (L170)
+-- 2. HN 아티클 삭제
+DELETE FROM article WHERE source_id IN (SELECT id FROM source WHERE type = 'hackernews');
 
-### Step 3: 카테고리 상세 페이지 제한 적용
-**수정** `src/app/category/[slug]/page.tsx`
-- 비로그인 시 `displayArticles`를 3개로 slice
-- 3개 아래에 블러 오버레이 영역 추가 (row 레이아웃용)
-  - 블러된 가짜 행 2~3개 + "로그인하면 더 볼 수 있어요" 오버레이
-- `user` 상태는 이미 `useAuth()`로 사용 중
+-- 3. HN 소스 삭제
+DELETE FROM source WHERE type = 'hackernews';
+```
 
-## 블러 UI 설계
-- 홈 (카드 레이아웃): 마지막에 블러 카드 1개 추가 (가로 스크롤)
-- 카테고리 상세 (행 레이아웃): 3개 행 아래에 블러 행 + 오버레이 (세로 목록)
-- 블러 효과: `blur-sm opacity-50` + absolute 오버레이
-- CTA: orange 버튼 "로그인" + Link href="/login"
+## Step 2: 코드 정리
 
-## 적용하지 않는 곳
-- 즐겨찾기 섹션: 로그인 필수이므로 변경 불필요
-- 마이페이지: 로그인 필수 페이지
+### `src/app/api/v1/cron/fetch-feeds/route.ts`
+- `fetchHackerNews` 함수 전체 삭제
+- 분기 `if (s.type === "hackernews") return fetchHackerNews(s);` 제거
+
+### `src/features/feed/sources/types.ts`
+- `SourceType`에서 `"hackernews"` 제거 → `"rss" | "devto"`
+
+### `src/components/feed/SourceBadge/index.tsx`
+- `TYPE_STYLES`에서 `hackernews` 항목 제거
+
+### `src/app/page.tsx`
+- `SOURCE_DOT_COLORS`에서 `hackernews` 항목 제거
+
+### `src/app/layout.tsx`
+- 메타데이터 description에서 "HackerNews, " 텍스트 제거
 
 ## 검증
-1. 비로그인 상태에서 홈 → 카테고리당 3개 + 블러 카드 확인
-2. 비로그인 상태에서 `/category/[slug]` → 3개 + 블러 오버레이 확인
-3. 로그인 후 제한 해제 확인
-4. 블러 카드의 로그인 버튼 → `/login` 이동 확인
+1. `npm run build` — 빌드 에러 없음
+2. TypeScript 컴파일 에러 없음 (SourceType 변경으로 인한 참조 확인)

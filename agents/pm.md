@@ -75,6 +75,11 @@ project-root/
 - 네트워크 관련 (오프라인, 타임아웃)
 - 사용자 행동 관련 (뒤로가기, 새로고침, 중복 클릭)
 
+### 4.5단계: 우선순위 산출
+- 각 FR에 대해 RICE 점수 산출: (Reach × Impact × Confidence) / Effort
+- RICE → MoSCoW 자동 매핑: Must(≥5.0), Should(2.0~4.9), Could(0.5~1.9), Won't(<0.5)
+- 구현 순서 결정 (Must RICE 내림차순 → Should → Could → Won't)
+
 ### 5단계: 휴리스틱 검증
 - 닐슨 10가지 휴리스틱 중 필수 4가지 체크
 - 위반 사항 있으면 수정 제안
@@ -112,6 +117,15 @@ project-root/
 
 ### FR-2: [요구사항명]
 ...
+
+## 구현 우선순위
+
+| FR | 기능 | R | I | C | E | RICE | MoSCoW | 구현 순서 |
+|----|------|---|---|---|---|------|--------|----------|
+| FR-1 | [기능명] | _ | _ | _% | _ | _ | Must/Should/Could/Won't | _ |
+
+> RICE = (Reach × Impact × Confidence) / Effort
+> Must(≥5.0) > Should(2.0~4.9) > Could(0.5~1.9) > Won't(<0.5)
 
 ## 비기능 요구사항
 - 성능, 보안, 접근성 등 해당 사항
