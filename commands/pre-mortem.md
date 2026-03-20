@@ -1,6 +1,7 @@
 ---
 description: 개발 리스크 사전 분석 — spec.md 기반 Tiger/Paper Tiger/Elephant 분류
 argument-hint: <spec-folder-or-file>
+effort: high
 ---
 
 **Always respond in Korean (한국어).**

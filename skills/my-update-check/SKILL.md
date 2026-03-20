@@ -1,6 +1,7 @@
 ---
 name: my-update-check
 description: Claude Code 업데이트를 확인하고 내 설정 영향을 분석하는 스킬. "업데이트 확인", "update check", "버전 확인" 요청에 사용.
+effort: medium
 allowed-tools: Read, Glob, Grep, WebSearch, Bash(claude --version), Bash(npm view *), Bash(curl *)
 ---
 

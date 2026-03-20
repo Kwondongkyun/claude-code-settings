@@ -53,37 +53,6 @@
     ]
   },
   "hooks": {
-    "Notification": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash ~/.claude/notify.sh Asks"
-          }
-        ]
-      }
-    ],
-    "PreToolUse": [
-      {
-        "matcher": "AskUserQuestion",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash ~/.claude/notify.sh Asks"
-          }
-        ]
-      }
-    ],
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash ~/.claude/notify.sh Stops"
-          }
-        ]
-      }
-    ],
     "SessionStart": [
       {
         "hooks": [
@@ -102,6 +71,17 @@
             "type": "command",
             "command": "bash ~/.claude/scripts/pre-compact-marker.sh",
             "statusMessage": "compact 마커 생성..."
+          }
+        ]
+      }
+    ],
+    "PostCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/scripts/post-compact-reminder.sh",
+            "statusMessage": "컨텍스트 복구 중..."
           }
         ]
       }
@@ -131,15 +111,14 @@
     "superpowers@claude-plugins-official": true
   },
   "language": "Korean",
+  "effortLevel": "medium",
   "mcpServers": {
     "playwright": {
       "args": [
-        "@playwright/mcp@latest"
+        "@playwright/mcp@0.0.68"
       ],
       "command": "npx"
     }
   },
-  "effortLevel": "medium",
-  "teammateMode": "auto",
-  "model": "opus"
+  "teammateMode": "auto"
 }

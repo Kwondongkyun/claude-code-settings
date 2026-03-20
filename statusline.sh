@@ -24,4 +24,16 @@ git rev-parse --git-dir > /dev/null 2>&1 && BRANCH=" | 🌿 $(git branch --show-
 
 echo -e "${CYAN}[$MODEL]${RESET} 📁 ${DIR##*/}$BRANCH"
 COST_FMT=$(printf '$%.2f' "$COST")
-echo -e "${BAR_COLOR}${BAR}${RESET} ${PCT}% | ${YELLOW}${COST_FMT}${RESET} | ⏱️ ${MINS}m ${SECS}s"
+
+# Rate limit (5h window)
+RATE_5H=$(echo "$input" | jq -r '.rate_limits.five_hour.used_percentage // empty')
+RATE_PART=""
+if [ -n "$RATE_5H" ]; then
+  RATE_INT=${RATE_5H%.*}
+  if [ "$RATE_INT" -ge 80 ] 2>/dev/null; then RATE_COLOR="$RED"
+  elif [ "$RATE_INT" -ge 50 ] 2>/dev/null; then RATE_COLOR="$YELLOW"
+  else RATE_COLOR="$GREEN"; fi
+  RATE_PART=" | ${RATE_COLOR}⚡${RATE_5H}%${RESET}"
+fi
+
+echo -e "${BAR_COLOR}${BAR}${RESET} ${PCT}% | ${YELLOW}${COST_FMT}${RESET} | ⏱️ ${MINS}m ${SECS}s${RATE_PART}"

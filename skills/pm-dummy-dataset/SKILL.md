@@ -1,6 +1,7 @@
 ---
 name: pm-dummy-dataset
 description: spec.md 기반으로 현실적인 테스트 데이터를 TypeScript 목 데이터와 SQL seed로 동시 생성한다. Foundation 단계에서 DB 시딩에 사용.
+effort: high
 allowed-tools: Read, Glob, Grep, Write, Bash
 ---
 

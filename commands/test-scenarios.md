@@ -1,6 +1,7 @@
 ---
 description: spec.md 기반 테스트 시나리오 생성 — 유저 플로우 + 에러 시나리오 → 테스트 계획
 argument-hint: <spec-folder-or-file>
+effort: high
 ---
 
 **Always respond in Korean (한국어).**

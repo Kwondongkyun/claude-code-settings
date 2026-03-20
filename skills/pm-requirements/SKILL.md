@@ -1,6 +1,7 @@
 ---
 name: pm-requirements
 description: Use when writing feature specifications, PRDs, acceptance criteria, and defining MVP scope with prioritization.
+effort: high
 allowed-tools: Read, Glob, Grep
 ---
 
