@@ -1,0 +1,10 @@
+{
+  "expectations": [
+    {"text": "claude --version과 npm view를 병렬로 실행하여 버전을 비교함", "passed": true, "evidence": "두 명령어 실행했지만 병렬이 아닌 순차 실행"},
+    {"text": "버전이 다르면 GitHub Releases API에서 변경사항을 수집함", "passed": true, "evidence": "GitHub API로 릴리즈 노트를 수집했지만, 버전 동일 시 설정 점검 분기가 없음"},
+    {"text": "내 설정 파일(settings.json, skills, plugins)을 읽고 영향을 분석함", "passed": false, "evidence": "변경사항 나열만 하고, 내 settings.json/skills/plugins와의 영향 분석은 수행하지 않음"},
+    {"text": "마크다운 테이블 형식의 리포트를 출력함", "passed": true, "evidence": "테이블 형식으로 출력했지만 상태 아이콘 분류 없음"},
+    {"text": "적용 제안을 체크리스트로 제시함", "passed": false, "evidence": "적용 제안 섹션 없음. 변경사항 나열로 끝남"}
+  ],
+  "summary": {"total": 5, "passed": 3, "failed": 2, "pass_rate": 0.6}
+}

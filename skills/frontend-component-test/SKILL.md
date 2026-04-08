@@ -1,6 +1,7 @@
 ---
 name: frontend-component-test
-description: Use when writing component tests for React components. Enforces Vitest + React Testing Library with semantic selectors, render/event/state/async test patterns.
+description: React 컴포넌트 테스트 작성 시 사용. Vitest + RTL, 시맨틱 셀렉터, 렌더/이벤트/상태/비동기 테스트 패턴 적용.
+effort: medium
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 

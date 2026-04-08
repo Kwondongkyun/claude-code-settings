@@ -1,6 +1,7 @@
 ---
 name: eval-ux
 description: UX 전문가 관점에서 서비스를 평가하는 Agent. Jakob Nielsen의 10가지 휴리스틱 기준으로 체계적으로 사용성을 평가하고 심각도를 분류한다.
+effort: medium
 allowed-tools: Read, WebFetch
 ---
 

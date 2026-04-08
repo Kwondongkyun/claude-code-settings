@@ -1,0 +1,65 @@
+{
+  "skill_name": "my-update-check",
+  "iteration": 1,
+  "timestamp": "2026-03-23",
+  "configurations": {
+    "with_skill": {
+      "pass_rates": {"eval-0": 1.0, "eval-1": 1.0, "eval-2": 1.0},
+      "mean_pass_rate": 1.0,
+      "total_assertions": 14,
+      "total_passed": 14
+    },
+    "without_skill": {
+      "pass_rates": {"eval-0": 0.6, "eval-1": 0.5, "eval-2": 0.4},
+      "mean_pass_rate": 0.5,
+      "total_assertions": 14,
+      "total_passed": 7
+    }
+  },
+  "delta": {
+    "pass_rate_improvement": "+50%",
+    "with_skill_advantage": "스킬 사용 시 14/14 통과 (100%), 미사용 시 7/14 통과 (50%)"
+  },
+  "per_eval": [
+    {
+      "eval_id": 0,
+      "eval_name": "basic-trigger",
+      "with_skill": {"pass_rate": 1.0, "passed": 5, "failed": 0},
+      "without_skill": {"pass_rate": 0.6, "passed": 3, "failed": 2},
+      "key_difference": "스킬 없이는 내 설정 영향 분석과 적용 제안 체크리스트가 없음"
+    },
+    {
+      "eval_id": 1,
+      "eval_name": "natural-language-trigger",
+      "with_skill": {"pass_rate": 1.0, "passed": 4, "failed": 0},
+      "without_skill": {"pass_rate": 0.5, "passed": 2, "failed": 2},
+      "key_difference": "스킬 없이는 내 설정과의 관련성 분류가 없고, 변경사항을 일반적으로만 나열"
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "settings-check-mode",
+      "with_skill": {"pass_rate": 1.0, "passed": 5, "failed": 0},
+      "without_skill": {"pass_rate": 0.4, "passed": 2, "failed": 3},
+      "key_difference": "스킬 없이는 설정 점검 모드 전환이 없고, 미활용/폐기/최적화 분류 체계가 없음"
+    }
+  ],
+  "analysis": {
+    "skill_strengths": [
+      "체계적 분기 로직 (버전 동일 → Step 1-A, 다름 → Step 2~4)",
+      "상태 아이콘(⚠️🔧💡✅) 기반 분류가 가독성 높음",
+      "내 설정 파일과의 구체적 매칭 분석 (plugins SHA, blocklist 충돌 등)",
+      "적용 제안 체크리스트가 실행 가능한 수준"
+    ],
+    "skill_weaknesses": [
+      "309줄로 큰 편 — 설정 점검(Step 1-A)을 별도 파일로 분리 가능",
+      "description에 자연어 트리거 키워드 부족 ('새 버전', '뭐 바뀌었어' 등)",
+      "하드코딩된 정보 (플러그인 수 등)가 구식화 가능"
+    ],
+    "baseline_gaps": [
+      "내 설정 영향 분석 없음 (변경사항 나열만)",
+      "설정 점검 모드 분기 없음",
+      "상태 분류 체계 없음 (미활용/폐기/최적화 구분 못 함)",
+      "적용 제안 체크리스트 없음"
+    ]
+  }
+}

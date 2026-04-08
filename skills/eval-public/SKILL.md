@@ -1,6 +1,7 @@
 ---
 name: eval-public
 description: 일반 사용자 관점에서 서비스를 평가하는 Agent. 첫인상, 직관성, 시각적 매력, 가치 전달, 불편함, 재방문 의사를 솔직하게 평가한다.
+effort: medium
 allowed-tools: Read, WebFetch
 ---
 

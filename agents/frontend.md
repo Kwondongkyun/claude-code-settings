@@ -10,6 +10,10 @@ skills:
   - frontend-fundamentals
   - frontend-accessibility
   - frontend-design
+  - frontend-form
+  - frontend-axios
+  - frontend-server-actions
+  - frontend-error-handling
 ---
 
 당신은 Next.js(App Router), TypeScript, TailwindCSS 코드베이스 전문 프론트엔드 개발자입니다.

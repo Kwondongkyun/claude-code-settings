@@ -1,6 +1,7 @@
 ---
 name: frontend-tdd-workflow
-description: Use when implementing features with Test-Driven Development. Enforces Red-Green-Refactor cycle, interface-first design, one test at a time, and 80% coverage target.
+description: TDD로 기능을 구현할 때 사용. Red-Green-Refactor 사이클, 인터페이스 우선 설계, 한 번에 하나의 테스트, 커버리지 80% 목표.
+effort: high
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 

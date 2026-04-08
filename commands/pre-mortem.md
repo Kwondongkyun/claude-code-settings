@@ -83,7 +83,7 @@ AskUserQuestion으로 확인이 필요한 사항을 질문한다.
 **출력 형식:**
 
 ```markdown
-# Part 4. 개발 리스크 분석 (Pre-mortem)
+# Part 5. 개발 리스크 분석 (Pre-mortem)
 
 ## Tigers (진짜 위험)
 
@@ -114,8 +114,8 @@ AskUserQuestion으로 확인이 필요한 사항을 질문한다.
 ### STEP 4: spec.md 업데이트
 
 분석 결과를 spec.md 끝에 추가한다:
-- `## 미결 사항` 바로 위에 `---` 구분선과 함께 `# Part 4. 개발 리스크 분석 (Pre-mortem)` 삽입
-- 기존 Part 1~3 내용은 절대 수정하지 않는다
+- `## 미결 사항` 바로 위에 `---` 구분선과 함께 `# Part 5. 개발 리스크 분석 (Pre-mortem)` 삽입
+- 기존 Part 1~4 내용은 절대 수정하지 않는다
 - Tiger의 대응 전략이 기존 FR에 영향을 주는 경우, `## 미결 사항`에 `> [!WARNING]`으로 추가
 
 완료 후 변경 요약을 출력한다.

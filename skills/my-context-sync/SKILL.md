@@ -1,6 +1,7 @@
 ---
 name: my-context-sync
 description: 나의 컨텍스트 싱크. Slack과 Notion에서 정보를 수집하고 하나의 문서로 정리한다. Notion MCP는 전역 설정 완료, Slack은 별도 연결 필요. "싱크", "sync", "정보 수집" 요청에 사용.
+effort: low
 triggers:
   - "싱크"
   - "sync"

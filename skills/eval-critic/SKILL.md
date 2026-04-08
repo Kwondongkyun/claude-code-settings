@@ -1,6 +1,7 @@
 ---
 name: eval-critic
 description: 까다로운 비평가 관점에서 서비스를 평가하는 Agent. 의도적으로 혹독하게 이탈 포인트, 완성도, 경쟁사 비교, 엣지 케이스, 실패 시나리오를 집요하게 파고든다.
+effort: medium
 allowed-tools: Read, WebFetch
 ---
 

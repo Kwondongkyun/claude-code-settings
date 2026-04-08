@@ -1,6 +1,7 @@
 ---
 name: frontend-form
-description: Use when creating forms with React Hook Form and Zod validation. Enforces shadcn/ui Form components, Zod schema patterns, error handling, and submit handling conventions.
+description: 다중 필드 + 검증 + 제출이 필요한 폼을 만들 때 사용. React Hook Form + Zod + shadcn/ui Form. 단일 입력(검색, 필터)에는 불필요. 로그인, 회원가입, 설정 등 본격적인 폼에 적용.
+effort: medium
 allowed-tools: Read, Write, Edit, Glob, Grep
 ---
 
@@ -231,83 +232,9 @@ const handleSubmit = form.handleSubmit(async (values) => {
 )}
 ```
 
-## Select, Checkbox 등 복합 필드
+## 복합 필드 & 수정 폼
 
-### Select
-
-```typescript
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-
-<FormField
-  control={form.control}
-  name="role"
-  render={({ field }) => (
-    <FormItem>
-      <FormLabel>역할</FormLabel>
-      <Select onValueChange={field.onChange} defaultValue={field.value}>
-        <FormControl>
-          <SelectTrigger>
-            <SelectValue placeholder="역할을 선택해주세요" />
-          </SelectTrigger>
-        </FormControl>
-        <SelectContent>
-          <SelectItem value="admin">관리자</SelectItem>
-          <SelectItem value="user">사용자</SelectItem>
-        </SelectContent>
-      </Select>
-      <FormMessage />
-    </FormItem>
-  )}
-/>
-```
-
-### Checkbox
-
-```typescript
-import { Checkbox } from '@/components/ui/checkbox';
-
-<FormField
-  control={form.control}
-  name="agreeTerms"
-  render={({ field }) => (
-    <FormItem className="flex items-center gap-2">
-      <FormControl>
-        <Checkbox
-          checked={field.value}
-          onCheckedChange={field.onChange}
-        />
-      </FormControl>
-      <FormLabel className="!mt-0">이용약관에 동의합니다</FormLabel>
-      <FormMessage />
-    </FormItem>
-  )}
-/>
-```
-
-## 수정 폼 (기존 데이터 편집)
-
-```typescript
-const form = useForm<FormValues>({
-  resolver: zodResolver(schema),
-  defaultValues: {
-    name: user?.name ?? '',
-    email: user?.email ?? '',
-  },
-});
-
-// 비동기로 데이터 로드 후 reset
-useEffect(() => {
-  if (user) {
-    form.reset(user);
-  }
-}, [user, form]);
-```
+Select, Checkbox, Radio 등 복합 필드 패턴과 기존 데이터 편집(수정 폼) 패턴은 `references/field-patterns.md`를 참고.
 
 ## 금지 사항
 

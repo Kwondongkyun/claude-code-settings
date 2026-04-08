@@ -1,6 +1,7 @@
 ---
 name: pm-user-flow
-description: Use when defining user stories, mapping user flows, and identifying scenarios/edge cases for new features or screens.
+description: 유저 스토리 작성, 유저 플로우 매핑, 시나리오/엣지케이스 식별에 사용.
+effort: medium
 allowed-tools: Read, Glob, Grep
 ---
 
@@ -19,32 +20,11 @@ So that [이점/목적].
 ### 수용 기준 (Acceptance Criteria)
 
 각 스토리에 반드시 Given-When-Then 형식의 수용 기준을 포함한다.
-
-```
-Given: [사전 조건]
-When: [사용자 행동]
-Then: [기대 결과]
-```
-
-예시:
-```
-Story: 사용자가 비밀번호를 재설정할 수 있다.
-
-Given: 사용자가 로그인 페이지에 있다
-When: "비밀번호 찾기" 링크를 클릭한다
-Then: 이메일 입력 폼이 표시된다
-
-Given: 사용자가 등록된 이메일을 입력했다
-When: "전송" 버튼을 클릭한다
-Then: 비밀번호 재설정 이메일이 발송된다
-Then: "이메일을 확인해주세요" 메시지가 표시된다
-
-Given: 사용자가 등록되지 않은 이메일을 입력했다
-When: "전송" 버튼을 클릭한다
-Then: "등록되지 않은 이메일입니다" 에러 메시지가 표시된다
-```
+작성 규칙(포맷, 원칙, 체크리스트)은 `pm-requirements` 스킬이 정의의 주인이다. 여기서는 플로우 단계마다 수용 기준을 연결하는 것에 집중.
 
 ### INVEST 원칙
+
+INVEST를 지키면 스토리가 독립 배포 가능하고, 일정 산정이 가능하고, 완료 여부를 테스트할 수 있다. 지키지 않으면 스토리가 서로 엮여서 하나를 수정하면 다른 것이 깨진다.
 
 좋은 사용자 스토리는 INVEST 원칙을 따른다:
 

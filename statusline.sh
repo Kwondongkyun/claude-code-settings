@@ -36,4 +36,14 @@ if [ -n "$RATE_5H" ]; then
   RATE_PART=" | ${RATE_COLOR}⚡${RATE_5H}%${RESET}"
 fi
 
+# Rate limit (7-day window)
+RATE_7D=$(echo "$input" | jq -r '.rate_limits.seven_day.used_percentage // empty')
+if [ -n "$RATE_7D" ]; then
+  RATE_7D_INT=${RATE_7D%.*}
+  if [ "$RATE_7D_INT" -ge 80 ] 2>/dev/null; then RATE_7D_COLOR="$RED"
+  elif [ "$RATE_7D_INT" -ge 50 ] 2>/dev/null; then RATE_7D_COLOR="$YELLOW"
+  else RATE_7D_COLOR="$GREEN"; fi
+  RATE_PART="${RATE_PART} | ${RATE_7D_COLOR}📅${RATE_7D}%${RESET}"
+fi
+
 echo -e "${BAR_COLOR}${BAR}${RESET} ${PCT}% | ${YELLOW}${COST_FMT}${RESET} | ⏱️ ${MINS}m ${SECS}s${RATE_PART}"

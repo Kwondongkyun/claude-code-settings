@@ -1,6 +1,7 @@
 ---
 name: pm-information-architecture
-description: Use when designing information structure, content organization, navigation hierarchy, and site maps for web/mobile applications.
+description: 정보 구조, 콘텐츠 조직, 네비게이션 계층, 사이트맵을 설계할 때 사용.
+effort: medium
 allowed-tools: Read, Glob, Grep
 ---
 
@@ -118,9 +119,9 @@ allowed-tools: Read, Glob, Grep
 - 자주 사용하는 기능에 단축 경로 제공 (대시보드, 즐겨찾기)
 - 브레드크럼으로 상위 경로 바로 이동 가능
 
-**예외:**
-- 보안이 중요한 기능 (결제, 설정 변경)은 의도적으로 단계를 둘 수 있음
-- 복잡한 입력 과정 (회원가입, 주문)은 단계를 나누되 진행률 표시
+**예외:** 3클릭을 초과해도 되는 경우는 "실수 방지"가 클릭 수보다 중요할 때.
+- 결제/설정 변경: 확인 페이지를 추가해서 실수로 결제되는 것을 방지
+- 회원가입/주문: 9단계 이상이므로 단계를 나누되 진행률 표시 (몇 단계 남았는지)
 
 ## 사이트맵 구조
 

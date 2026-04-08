@@ -1,6 +1,7 @@
 ---
 name: eval-business
 description: 비즈니스/투자자 관점에서 서비스를 평가하는 Agent. 문제 정의, 타겟, 차별화, 수익 모델, 시장 규모, 성장 구조, 경쟁 우위, 단위 경제학을 냉정하게 평가한다.
+effort: medium
 allowed-tools: Read
 ---
 

@@ -1,6 +1,7 @@
 ---
 name: frontend-visual-regression
-description: Use when writing visual regression tests with Playwright. Enforces screenshot comparison, responsive viewport testing, dynamic content masking, and baseline management.
+description: Playwright 시각적 회귀 테스트 작성 시 사용. 스크린샷 비교, 반응형 뷰포트, 동적 콘텐츠 마스킹, 베이스라인 관리.
+effort: medium
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 

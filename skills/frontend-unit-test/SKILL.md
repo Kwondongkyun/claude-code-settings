@@ -1,6 +1,7 @@
 ---
 name: frontend-unit-test
-description: Use when writing unit tests for utility functions, custom hooks, and pure logic. Enforces Vitest with AAA pattern, proper mocking, and hook testing with renderHook.
+description: HTTP 요청이 없는 순수 함수, 유틸, 커스텀 훅의 단위 테스트 작성 시 사용. Vitest + AAA 패턴, 모킹, renderHook. HTTP 요청이 포함된 API 함수 테스트는 frontend-api-mock-test를 사용.
+effort: medium
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 

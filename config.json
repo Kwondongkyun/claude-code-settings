@@ -1,8 +1,8 @@
 {
   "mcpServers": {
     "pencil": {
-      "command": "npx",
-      "args": ["-y", "@anthropic-ai/pencil"]
+      "command": "/Users/kwondong-kyun/.cursor/extensions/highagency.pencildev-0.6.36-universal/out/mcp-server-darwin-arm64",
+      "args": ["-app", "pencil"]
     }
   }
 }

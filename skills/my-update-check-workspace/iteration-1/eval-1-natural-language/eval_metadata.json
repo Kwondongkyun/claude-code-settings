@@ -1,0 +1,11 @@
+{
+  "eval_id": 1,
+  "eval_name": "natural-language-trigger",
+  "prompt": "claude code 새 버전 나왔어? 뭐 바뀌었는지 알려줘",
+  "assertions": [
+    "my-update-check 스킬이 트리거됨",
+    "버전 비교를 수행함",
+    "변경사항을 카테고리별로 분류함",
+    "내 설정과 관련된 변경사항을 우선 표시함"
+  ]
+}

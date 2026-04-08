@@ -1,6 +1,7 @@
 ---
 name: frontend-components
-description: Use when creating or modifying React components. Enforces directory/index.tsx pattern, proper import order, Props type definitions, and conditional rendering patterns.
+description: React 컴포넌트 생성/수정 시 사용. directory/index.tsx 패턴, import 순서, Props 타입 정의, 조건부 렌더링 패턴.
+effort: low
 allowed-tools: Read, Write, Edit, Glob, Grep
 ---
 
@@ -88,64 +89,11 @@ const addItem = useCallback((item: Item) => {
 
 ## Browser API 사용 패턴
 
-### SSR 안전한 localStorage 접근
-
-Next.js는 서버에서 먼저 렌더링한다. `localStorage`는 브라우저 전용 API라서 **컴포넌트 본문에서 직접 접근하면 서버에서 에러**가 난다. 반드시 `useEffect` 안에서 접근한다.
-
-```typescript
-// ❌ 서버 렌더링 시 ReferenceError: localStorage is not defined
-function TodoApp() {
-  const saved = localStorage.getItem('todos');
-  const [todos, setTodos] = useState(JSON.parse(saved || '[]'));
-}
-
-// ✅ useEffect로 클라이언트에서만 접근
-function TodoApp() {
-  const [todos, setTodos] = useState<Todo[]>([]);
-
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem('todos');
-      if (saved) setTodos(JSON.parse(saved));
-    } catch {
-      // localStorage 접근 불가 (시크릿 모드 등)
-    }
-  }, []);
-}
-```
-
-### localStorage 저장 실패 롤백
-
-localStorage는 **용량 초과(5MB)**, **시크릿 모드**, **스토리지 비활성화** 등으로 실패할 수 있다.
-저장 실패 시 **React 상태를 이전 값으로 되돌려서** UI와 실제 저장 데이터의 불일치를 방지한다.
-
-```typescript
-// ❌ 저장 실패해도 UI는 변경됨 → 새로고침 시 데이터 증발
-const addTodo = (text: string) => {
-  const next = [...todos, { id: Date.now(), text, completed: false }];
-  setTodos(next);
-  localStorage.setItem('todos', JSON.stringify(next)); // 실패하면?
-};
-
-// ✅ 함수형 업데이터 + 저장 실패 시 롤백
-const addTodo = (text: string) => {
-  setTodos(prev => {
-    const next = [...prev, { id: Date.now(), text, completed: false }];
-    try {
-      localStorage.setItem('todos', JSON.stringify(next));
-      return next;
-    } catch {
-      setStorageError('저장 공간이 부족합니다');
-      return prev; // 롤백
-    }
-  });
-};
-```
-
-패턴 요약:
-- **초기 로드**: `useEffect` + `try/catch` → 실패 시 빈 배열
-- **저장**: 함수형 업데이터 안에서 `try/catch` → 실패 시 `prev` 반환 (롤백)
-- **에러 표시**: `storageError` 상태로 사용자에게 저장 실패 안내
+localStorage를 사용하는 컴포넌트를 만들 때는 `references/localstorage-patterns.md`를 참고한다.
+핵심만 요약하면:
+- **초기 로드**: 반드시 `useEffect` 안에서 접근 (SSR 에러 방지)
+- **저장**: 함수형 업데이터 + `try/catch` → 실패 시 롤백
+- **버전 관리**: 키에 버전 프리픽스 (`todos:v2`)
 
 ## RSC 직렬화 최소화
 
@@ -236,40 +184,6 @@ export const Composer = {
 - 서브 컴포넌트가 부모 없이는 의미가 없는 경우 (Form.Field, Table.Row 등)
 - 3개 이상의 관련 컴포넌트가 항상 함께 사용되는 경우
 
-## localStorage 버전 관리
-
-저장 구조가 변경되면 이전 버전 데이터가 파싱 에러를 유발한다.
-**버전 프리픽스**를 키에 포함하여 구조 변경 시 안전하게 마이그레이션한다.
-
-```typescript
-// ❌ 구조 변경 시 기존 사용자 데이터가 깨짐
-localStorage.setItem('todos', JSON.stringify(todos));
-
-// ✅ 버전 프리픽스로 안전한 마이그레이션
-const STORAGE_KEY = 'todos:v2';
-
-function loadTodos(): Todo[] {
-  try {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved) return JSON.parse(saved);
-
-    // v1 → v2 마이그레이션
-    const v1 = localStorage.getItem('todos:v1');
-    if (v1) {
-      const migrated = migrateV1toV2(JSON.parse(v1));
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(migrated));
-      localStorage.removeItem('todos:v1');
-      return migrated;
-    }
-  } catch { /* 파싱 실패 시 기본값 */ }
-  return [];
-}
-```
-
-적용 기준:
-- 저장 데이터의 타입/구조가 변경될 가능성이 있는 경우
-- 다수의 사용자가 이미 이전 구조 데이터를 보유한 경우
-
 ## useTransition 패턴
 
 비긴급 상태 업데이트는 `useTransition`으로 감싸서 UI 응답성을 유지한다.
@@ -343,6 +257,11 @@ AdminTable/
 ├── hooks.ts               # 컴포넌트 전용 훅
 └── types.ts               # 컴포넌트 전용 타입
 ```
+
+타입 위치 규칙:
+- **Props 타입**: 각 컴포넌트의 index.tsx 파일 안에 정의 (해당 컴포넌트에서만 사용)
+- **공유 타입**: `types.ts`에 정의 (서브컴포넌트 간 공유하는 타입, 예: TableRow와 TableHeader가 같은 ColumnDef 타입을 쓸 때)
+- **도메인 타입**: `features/[domain]/types.ts`에 정의 (API 요청/응답 타입 등 컴포넌트 밖에서도 쓰이는 타입)
 
 ## Import 순서 (필수)
 ```typescript
@@ -431,66 +350,9 @@ import Image from 'next/image';
 
 ## shadcn/ui 컴포넌트 사용 (HTML 폼/UI 요소 대체)
 
-HTML 기본 폼·UI 요소를 사용하기 전에 **반드시 shadcn/ui에 대응 컴포넌트가 있는지 먼저 확인**한다.
-대응 컴포넌트가 있으면 HTML 태그 대신 shadcn/ui를 사용한다. 일관된 디자인과 접근성이 자동 적용된다.
-
-### UI 라이브러리 우선순위
-
-1. **Shadcn UI** - 기본 UI 컴포넌트
-2. **Kibo UI** - 고급 복합 컴포넌트
-3. **Radix UI** - 접근성 기반 원시 컴포넌트
-4. **Lucide Icons** - 아이콘 시스템
-
-> shadcn/ui 컴포넌트 목록: https://ui.shadcn.com/docs/components
-
-```typescript
-// ✅ Good: shadcn/ui 컴포넌트
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-
-<Button onClick={handleClick}>저장</Button>
-<Input placeholder="이름 입력" value={name} onChange={handleChange} />
-
-// ❌ Bad: shadcn/ui에 있는데 HTML 태그 직접 사용
-<button onClick={handleClick}>저장</button>
-<input placeholder="이름 입력" value={name} onChange={handleChange} />
-```
-
-### 자주 사용하는 HTML 태그 대체
-
-| HTML 태그 | shadcn/ui 컴포넌트 |
-|-----------|-------------------|
-| `<button>` | `<Button>` |
-| `<input>` | `<Input>` |
-| `<textarea>` | `<Textarea>` |
-| `<select>` | `<Select>` |
-| `<table>` | `<Table>` |
-| `<input type="checkbox">` | `<Checkbox>` |
-| `<hr>` | `<Separator>` |
-
-### UI 패턴 → shadcn/ui 컴포넌트 매핑
-
-| UI 패턴 | shadcn/ui 컴포넌트 | 비고 |
-|---------|-------------------|------|
-| 모달/팝업 | `Dialog` | `AlertDialog`는 확인/취소용 |
-| 토스트/알림 | `Sonner` 또는 `Toast` | |
-| 드롭다운 메뉴 | `DropdownMenu` | 우클릭 메뉴도 포함 |
-| 툴팁 | `Tooltip` | |
-| 탭 | `Tabs` | |
-| 아코디언/접기 | `Accordion` / `Collapsible` | |
-| 사이드 패널 | `Sheet` | 슬라이드 아웃 |
-| 팝오버 | `Popover` | |
-| 날짜 선택 | `Calendar` + `Popover` | |
-| 자동완성/콤보박스 | `Command` + `Popover` | |
-| 로딩 스켈레톤 | `Skeleton` | |
-| 뱃지/태그 | `Badge` | |
-| 프로그레스 바 | `Progress` | |
-
-위 표는 대표 예시일 뿐이다. shadcn/ui에서 제공하는 모든 컴포넌트를 우선 사용한다.
-
-### HTML 태그 허용 케이스
-- shadcn/ui에 대응 컴포넌트가 없는 경우
-- `<form>`, `<fieldset>`, `<legend>` 등 시맨틱 폼 구조 태그
+HTML 기본 폼·UI 요소 대신 **shadcn/ui 컴포넌트를 우선 사용**한다. 일관된 디자인과 접근성이 자동 적용된다.
+UI 라이브러리 우선순위: Shadcn UI > Kibo UI > Radix UI > Lucide Icons.
+HTML → shadcn/ui 매핑 테이블은 `references/shadcn-mapping.md`를 참고.
 
 ## Boolean Props
 ```typescript
@@ -505,63 +367,5 @@ import { Input } from '@/components/ui/input';
 
 ## 메모이제이션 사용 기준
 
-기본 원칙: **메모이제이션은 꼭 필요한 경우에만 사용한다.** 무분별한 사용은 코드 복잡도만 높이고 성능 이점이 없다.
-
-### memo - 사용해야 하는 경우
-```typescript
-// ✅ 무거운 컴포넌트 + 부모가 자주 리렌더링될 때
-export const HeavyList = memo(function HeavyList({ items }: Props) {
-  return items.map((item) => <ComplexCard key={item.id} data={item} />);
-});
-```
-
-사용 조건 (모두 충족해야 함):
-- 자식 컴포넌트의 렌더링 비용이 큼 (리스트, 차트, 복잡한 UI)
-- 부모가 자주 리렌더링됨
-- 전달되는 props가 실제로 자주 변경되지 않음
-
-### useCallback - 사용해야 하는 경우
-```typescript
-// ✅ memo로 감싼 자식에게 전달하는 콜백
-const handleClick = useCallback((id: string) => {
-  setSelectedId(id);
-}, []);
-
-<MemoizedChild onClick={handleClick} />
-
-// ❌ memo로 감싸지 않은 자식에게는 불필요
-const handleClick = useCallback(() => { ... }, []); // 의미 없음
-<NormalChild onClick={handleClick} />
-```
-
-### useMemo - 사용해야 하는 경우
-```typescript
-// ✅ 비용이 큰 계산 (정렬, 필터, reduce 등)
-const sorted = useMemo(
-  () => [...items].sort((a, b) => b.price - a.price),
-  [items]
-);
-
-// ✅ memo로 감싼 자식에게 전달하는 객체/배열
-const config = useMemo(() => ({ page, keyword }), [page, keyword]);
-<MemoizedChild config={config} />
-
-// ❌ 단순 계산에는 불필요
-const total = useMemo(() => a + b, [a, b]); // 오버헤드만 추가
-```
-
-### 사용 금지 케이스
-```typescript
-// ❌ 단순 값 계산
-const fullName = useMemo(() => `${first} ${last}`, [first, last]);
-
-// ❌ deps가 매번 바뀌는 useCallback (메모이제이션 효과 없음)
-const handleClick = useCallback(() => {
-  doSomething(obj);
-}, [obj]); // obj가 매 렌더마다 새로 생성되면 무의미
-
-// ❌ 가벼운 컴포넌트에 memo
-export const Label = memo(function Label({ text }: Props) {
-  return <span>{text}</span>; // 렌더링 비용이 거의 없음
-});
-```
+꼭 필요한 경우에만 사용한다. 무분별한 memo/useCallback/useMemo는 복잡도만 높인다.
+상세 규칙과 사용/금지 케이스는 `references/memoization.md`를 참고.

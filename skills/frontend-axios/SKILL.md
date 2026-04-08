@@ -1,6 +1,7 @@
 ---
 name: frontend-axios
-description: Use when setting up API calls or configuring HTTP client. Defines Axios instance with interceptors, API function patterns in features folder, and 3-tier error handling structure.
+description: API 호출 설정/HTTP 클라이언트 구성 시 사용. Axios 인스턴스 + 인터셉터, features 폴더 API 함수 패턴, 3단계 에러 처리.
+effort: low
 allowed-tools: Read, Write, Edit, Glob, Grep
 ---
 
@@ -57,9 +58,12 @@ api.interceptors.response.use(
     if (
       error.response?.status === 401 &&
       !originalRequest._retry &&
+      // refresh/login 요청 자체가 401이면 재시도하면 무한 루프에 빠진다
       !originalRequest.url?.includes('/auth/refresh') &&
       !originalRequest.url?.includes('/auth/login')
     ) {
+      // 이미 refresh 중이면 대기열에 넣는다. 동시에 여러 API가 401을 받으면
+      // refresh를 한 번만 하고, 나머지는 새 토큰을 받아 재시도한다.
       if (isRefreshing) {
         return new Promise((resolve, reject) => {
           failedQueue.push({

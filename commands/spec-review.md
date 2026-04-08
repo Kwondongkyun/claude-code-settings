@@ -19,8 +19,8 @@ argument-hint: <spec-folder-or-file>
 ### 문서 역할 분류
 
 읽은 파일들을 아래 기준으로 분류한다:
-- **메인 문서**: PRD (`prd.md` 또는 파일명에 `requirements`/`prd` 포함) — 리뷰의 중심축
-- **컨텍스트 문서**: 유저플로우, IA, 에러시나리오 등 나머지 — 교차 검증용
+- **메인 문서**: `spec.md` 또는 파일명에 `spec`/`requirements`/`prd` 포함 — 리뷰의 중심축
+- **컨텍스트 문서**: `sitemap.md`, `ia.md` 등 나머지 — 교차 검증용
 
 메인 문서가 없으면 가장 큰 파일을 메인으로 사용한다.
 모든 문서를 읽은 후 아래 워크플로우를 진행한다.
@@ -56,7 +56,8 @@ Synthesize interview findings into issues, organized by section:
 3) Architecture & Feasibility — technical risks, unrealistic constraints, unresolved dependencies
 4) Scope & Boundaries — unclear in/out of scope, scope creep risks, undefined limits
 5) UX & User Flows (if applicable) — incomplete flows, missing error/loading/empty states
-6) Cross-document Consistency — PRD와 컨텍스트 문서 간 불일치, 누락, 모순 (컨텍스트 문서가 있을 때만)
+6) Information Architecture (if applicable) — 사이트맵 누락 페이지, 네비게이션 계층 깊이(3클릭 규칙), 라벨링 일관성, URL 구조와 계층 불일치 (Part 4가 있을 때만)
+7) Cross-document Consistency — PRD와 컨텍스트 문서(유저플로우/IA/에러시나리오) 간 불일치, 누락, 모순 (컨텍스트 문서가 있을 때만)
 
 **Issue format:**
 - Number issues (1-1, 1-2 = section 1, issue 1 and 2).

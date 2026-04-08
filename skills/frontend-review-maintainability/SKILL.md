@@ -1,6 +1,7 @@
 ---
 name: frontend-review-maintainability
-description: Use when reviewing React/Next.js code for maintainability issues. Covers DRY violations, cyclomatic complexity, function length, naming clarity, magic values, and error handling structure.
+description: React/Next.js 코드의 유지보수성을 리뷰할 때 사용. DRY 위반, 순환복잡도, 함수 길이, 네이밍 명확성, 매직 값, 에러 처리 구조.
+effort: medium
 allowed-tools: Read, Glob, Grep
 ---
 

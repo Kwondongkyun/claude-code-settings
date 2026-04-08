@@ -1,6 +1,7 @@
 ---
 name: frontend-accessibility
-description: Use when creating interactive UI components. Enforces ARIA roles, keyboard navigation, label usage, html lang attribute, and focus management patterns.
+description: 인터랙티브 UI 컴포넌트 작성 시 사용. ARIA 역할, 키보드 네비게이션, 라벨, html lang, 포커스 관리 패턴 적용.
+effort: low
 allowed-tools: Read, Write, Edit, Glob, Grep
 ---
 

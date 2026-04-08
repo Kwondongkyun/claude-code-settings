@@ -1,6 +1,7 @@
 ---
 name: frontend-api-mock-test
-description: Use when writing API integration tests with MSW. Enforces MSW v2 handlers, setupServer pattern, Axios interceptor testing, and error scenario coverage.
+description: HTTP 요청이 포함된 코드를 테스트할 때 사용. MSW로 API 요청을 가로채서 가짜 응답을 반환. API 함수(getMeApi 등), Axios 인터셉터, 에러 시나리오 테스트. HTTP 요청이 없는 순수 함수는 frontend-unit-test를 사용.
+effort: medium
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 

@@ -1,0 +1,10 @@
+{
+  "expectations": [
+    {"text": "버전 비교 후 동일하면 설정 점검 모드로 전환함", "passed": true, "evidence": "2.1.81 동일 확인 → Step 1-A 설정 점검으로 전환"},
+    {"text": "스킬, 에이전트, MCP, 플러그인 설정을 스캔함", "passed": true, "evidence": "skills/*/SKILL.md, agents/*.md, settings.json, installed_plugins.json, blocklist.json 모두 스캔"},
+    {"text": "미활용 기능, 폐기 예정, 최적화 가능 항목을 구분함", "passed": true, "evidence": "💡 미활용 3건, 🔧 최적화 3건, ⚠️ 폐기/충돌 2건 구분"},
+    {"text": "점검 결과를 상태 아이콘으로 분류한 테이블로 출력함", "passed": true, "evidence": "⚠️🔧💡✅ 아이콘 + 4컬럼 테이블 사용"},
+    {"text": "자동 실행 없이 적용 제안만 제시함", "passed": true, "evidence": "적용 제안 체크리스트로만 제시. 자동 실행 없음"}
+  ],
+  "summary": {"total": 5, "passed": 5, "failed": 0, "pass_rate": 1.0}
+}

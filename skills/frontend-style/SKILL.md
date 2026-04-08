@@ -1,6 +1,7 @@
 ---
 name: frontend-style
-description: Use when styling components or writing CSS. Enforces TailwindCSS with cn() utility, proper environment variables usage. Prohibits emojis, any types, inline styles, and console.log.
+description: 컴포넌트 스타일링/CSS 작성 시 사용. TailwindCSS + cn() 유틸리티, 환경변수 규칙. 이모지, any 타입, 인라인 스타일, console.log 금지.
+effort: low
 allowed-tools: Read, Edit, Glob, Grep
 ---
 
@@ -33,6 +34,25 @@ import { cn } from '@/lib/utils';
 <div className="flex-shrink-0" />
 <div className="flex-grow" />
 ```
+
+### 수직 간격: flex gap 사용 (space-y 금지)
+
+```typescript
+// ✅ Good: flex flex-col + gap
+<div className="flex flex-col gap-4">
+  <Section />
+  <Section />
+</div>
+
+// ❌ Bad: space-y
+<div className="space-y-4">
+  <Section />
+  <Section />
+</div>
+```
+
+`space-y-*`는 `> * + *` 선택자 기반이라 조건부 렌더링 시 첫 자식에 예상치 못한 마진이 붙는 경우가 있다.
+`flex flex-col gap-*`는 빈 자식이 없을 때도 안정적으로 동작하므로 항상 이를 사용한다.
 
 ### bg 그라데이션 사용 금지
 

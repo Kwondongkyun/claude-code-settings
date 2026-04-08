@@ -1,6 +1,7 @@
 ---
 name: frontend-review-performance
-description: Use when reviewing React/Next.js code for performance issues. Covers unnecessary re-renders, N+1 requests, memory leaks, bundle size, inefficient algorithms, and caching.
+description: React/Next.js 코드의 성능 이슈를 리뷰할 때 사용. 불필요한 리렌더, N+1 요청, 메모리 누수, 번들 크기, 비효율 알고리즘, 캐싱.
+effort: medium
 allowed-tools: Read, Glob, Grep
 ---
 

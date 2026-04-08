@@ -1,6 +1,6 @@
 ---
 name: pm-requirements
-description: Use when writing feature specifications, PRDs, acceptance criteria, and defining MVP scope with prioritization.
+description: 기능 명세, PRD, 수용 기준 작성 및 RICE 우선순위로 MVP 범위를 정의할 때 사용.
 effort: high
 allowed-tools: Read, Glob, Grep
 ---
@@ -44,12 +44,9 @@ allowed-tools: Read, Glob, Grep
 | 1 | ... | ... | ... |
 
 ## 5. 상태 정의 (필수)
-각 화면별:
-- 기본 상태 (Default)
-- 로딩 상태 (Loading)
-- 빈 상태 (Empty)
-- 에러 상태 (Error)
-- 성공 상태 (Success)
+상태를 정의하지 않으면 개발 중 빈 화면, 무한 스피너, 에러 미처리 같은 버그가 남는다.
+각 화면별 5가지 상태(Default/Loading/Empty/Error/Success)를 정의한다.
+상세 규칙(로딩 UI 선택, Empty CTA, 에러 메시지 원칙 등)은 `pm-error-scenarios` 스킬이 정의의 주인이다. 여기서는 상태 목록만 나열.
 
 ## 6. 우선순위
 MoSCoW 기준으로 분류
@@ -76,11 +73,7 @@ Then: [결과 — 시스템이 보여주는 응답]
 1. **하나의 수용 기준 = 하나의 시나리오** (여러 시나리오를 하나에 합치지 않는다)
 2. **테스트 가능해야 한다** (주관적 표현 금지: "빠르게", "적절하게" → 구체적 수치)
 3. **사용자 관점으로 작성** (기술 구현이 아닌 사용자가 보는 결과)
-
-```
-❌ Bad: 시스템이 적절한 에러를 반환한다
-✅ Good: "이메일 형식이 올바르지 않습니다" 메시지가 입력 필드 하단에 표시된다
-```
+4. **에러 메시지 문구는 직접 정의하지 않는다** — 에러 메시지 작성 원칙(명확성, 해결 방법, 기술 용어 금지)은 `pm-error-scenarios`가 정의의 주인. 수용 기준에서는 "에러 메시지가 표시된다"까지만 명시
 
 ### 수용 기준 체크리스트
 

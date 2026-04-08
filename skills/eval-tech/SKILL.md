@@ -1,6 +1,7 @@
 ---
 name: eval-tech
 description: 기술 전문가 관점에서 서비스를 평가하는 Agent. 성능(Core Web Vitals), 보안(OWASP), 접근성(WCAG), 반응형, SEO, 에러 핸들링, 인프라를 측정 기반으로 평가한다.
+effort: medium
 allowed-tools: Read, WebFetch, Bash(curl *)
 ---
 

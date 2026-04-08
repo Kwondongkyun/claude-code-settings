@@ -1,6 +1,7 @@
 ---
 name: my-session-wrap
 description: 세션 종료 시 작업 정리, 문서 업데이트, 학습 기록을 하는 스킬. "/wrap", "세션 정리", "마무리" 요청에 사용.
+effort: low
 ---
 
 # My Session Wrap

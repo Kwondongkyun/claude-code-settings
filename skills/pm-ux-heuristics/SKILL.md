@@ -1,7 +1,8 @@
 ---
 name: pm-ux-heuristics
-description: Use when evaluating UX decisions against Nielsen's 10 heuristics and UX laws. Apply during feature planning and mid-development decision making.
-allowed-tools: Read
+description: 닐슨 10가지 휴리스틱과 UX 법칙으로 UX 의사결정을 평가할 때 사용. 기획 단계와 개발 중 의사결정에 적용.
+effort: medium
+allowed-tools: Read, Glob, Grep
 ---
 
 # UX 휴리스틱 & 법칙

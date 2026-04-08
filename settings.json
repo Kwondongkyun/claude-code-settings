@@ -95,6 +95,29 @@
           }
         ]
       }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/scripts/lint-fix.sh \"$CLAUDE_FILE_PATH\"",
+            "statusMessage": "린트 자동 수정 중..."
+          }
+        ]
+      }
+    ],
+    "StopFailure": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/notify.sh '⚠️ Claude Code 중단' 'API 에러로 작업이 멈췄습니다'",
+            "statusMessage": "에러 알림 전송..."
+          }
+        ]
+      }
     ]
   },
   "statusLine": {
@@ -108,7 +131,11 @@
     "planning-with-files@planning-with-files": false,
     "ralph-loop@claude-plugins-official": true,
     "security-guidance@claude-plugins-official": true,
-    "superpowers@claude-plugins-official": true
+    "superpowers@claude-plugins-official": true,
+    "skill-creator@claude-plugins-official": true,
+    "telegram@claude-plugins-official": true,
+    "discord@claude-plugins-official": true,
+    "last30days@last30days-skill": false
   },
   "language": "Korean",
   "effortLevel": "medium",
@@ -118,6 +145,15 @@
         "@playwright/mcp@0.0.68"
       ],
       "command": "npx"
+    },
+    "pencil": {
+      "command": "/Applications/Pencil.app/Contents/Resources/app.asar.unpacked/out/mcp-server-darwin-arm64",
+      "args": [
+        "--app",
+        "desktop"
+      ],
+      "env": {},
+      "type": "stdio"
     }
   },
   "teammateMode": "auto"

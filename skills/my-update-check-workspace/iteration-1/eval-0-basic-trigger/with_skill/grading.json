@@ -1,0 +1,10 @@
+{
+  "expectations": [
+    {"text": "claude --version과 npm view를 병렬로 실행하여 버전을 비교함", "passed": true, "evidence": "트랜스크립트에서 두 명령어를 병렬 실행 확인"},
+    {"text": "버전이 다르면 GitHub Releases API에서 변경사항을 수집함", "passed": true, "evidence": "버전 동일(2.1.81)이라 Step 1-A로 진행 — 분기 로직 정상 작동"},
+    {"text": "내 설정 파일(settings.json, skills, plugins)을 읽고 영향을 분석함", "passed": true, "evidence": "settings.json, installed_plugins.json, blocklist.json, agents, skills frontmatter 모두 스캔"},
+    {"text": "마크다운 테이블 형식의 리포트를 출력함", "passed": true, "evidence": "상태 아이콘(⚠️🔧💡✅) + 4컬럼 테이블로 구조화된 리포트 생성"},
+    {"text": "적용 제안을 체크리스트로 제시함", "passed": true, "evidence": "적용 제안 섹션에 체크리스트 형식으로 6개 제안 포함"}
+  ],
+  "summary": {"total": 5, "passed": 5, "failed": 0, "pass_rate": 1.0}
+}

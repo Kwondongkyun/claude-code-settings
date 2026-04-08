@@ -1,0 +1,12 @@
+{
+  "eval_id": 0,
+  "eval_name": "basic-trigger",
+  "prompt": "업데이트 확인해줘",
+  "assertions": [
+    "claude --version과 npm view를 병렬로 실행하여 버전을 비교함",
+    "버전이 다르면 GitHub Releases API에서 변경사항을 수집함",
+    "내 설정 파일(settings.json, skills, plugins)을 읽고 영향을 분석함",
+    "마크다운 테이블 형식의 리포트를 출력함",
+    "적용 제안을 체크리스트로 제시함"
+  ]
+}

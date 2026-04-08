@@ -1,6 +1,7 @@
 ---
 name: frontend-e2e-test
-description: Use when writing E2E tests with Playwright. Enforces Page Object Model, semantic selectors, network waiting, auth state management, and failure collection.
+description: Playwright E2E 테스트 작성 시 사용. Page Object Model, 시맨틱 셀렉터, 네트워크 대기, 인증 상태 관리, 실패 수집.
+effort: medium
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 

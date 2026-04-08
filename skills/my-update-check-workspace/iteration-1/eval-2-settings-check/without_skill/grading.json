@@ -1,0 +1,10 @@
+{
+  "expectations": [
+    {"text": "버전 비교 후 동일하면 설정 점검 모드로 전환함", "passed": false, "evidence": "버전 확인은 했지만, '설정 점검 모드' 같은 체계적 분기가 없음. 설정을 나열했지만 구조화된 점검이 아님"},
+    {"text": "스킬, 에이전트, MCP, 플러그인 설정을 스캔함", "passed": true, "evidence": "settings.json, plugins, hooks 등을 읽었지만 skills/agents는 스캔하지 않음 (부분적 pass)"},
+    {"text": "미활용 기능, 폐기 예정, 최적화 가능 항목을 구분함", "passed": false, "evidence": "문제 2건(notify.sh 누락, planning-with-files)만 발견. 미활용/폐기/최적화 분류 체계 없음"},
+    {"text": "점검 결과를 상태 아이콘으로 분류한 테이블로 출력함", "passed": false, "evidence": "상태 아이콘 없음. 일반 테이블 형식으로 설정값을 나열"},
+    {"text": "자동 실행 없이 적용 제안만 제시함", "passed": true, "evidence": "자동 실행하지 않고 제안만 함"}
+  ],
+  "summary": {"total": 5, "passed": 2, "failed": 3, "pass_rate": 0.4}
+}

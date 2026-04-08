@@ -1,0 +1,9 @@
+{
+  "expectations": [
+    {"text": "my-update-check 스킬이 트리거됨", "passed": false, "evidence": "스킬 없이 수행 — 트리거 해당 없음 (baseline)"},
+    {"text": "버전 비교를 수행함", "passed": true, "evidence": "claude --version + npm view 실행"},
+    {"text": "변경사항을 카테고리별로 분류함", "passed": true, "evidence": "새 기능/버그 수정/개선 등으로 분류했지만 내 설정과의 관련성 분류는 없음"},
+    {"text": "내 설정과 관련된 변경사항을 우선 표시함", "passed": false, "evidence": "변경사항을 일반적으로 나열. 내 settings.json/plugins와의 매칭 없음"}
+  ],
+  "summary": {"total": 4, "passed": 2, "failed": 2, "pass_rate": 0.5}
+}

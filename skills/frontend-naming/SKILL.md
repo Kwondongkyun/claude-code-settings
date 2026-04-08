@@ -1,6 +1,7 @@
 ---
 name: frontend-naming
-description: Use when naming files, variables, functions, or types. Enforces PascalCase for components, camelCase for functions, UPPER_SNAKE_CASE for constants, kebab-case for files.
+description: 파일, 변수, 함수, 타입 네이밍 시 사용. 컴포넌트 PascalCase, 함수 camelCase, 상수 UPPER_SNAKE_CASE, 파일 kebab-case.
+effort: low
 allowed-tools: Read, Glob, Grep
 ---
 

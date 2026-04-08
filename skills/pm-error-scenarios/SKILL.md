@@ -1,6 +1,7 @@
 ---
 name: pm-error-scenarios
-description: Use when defining error states, loading states, empty states, and edge case handling for features. Covers error messages, recovery paths, and state-specific UX.
+description: 에러/로딩/빈 상태와 엣지케이스를 정의할 때 사용. 에러 메시지, 복구 경로, 상태별 UX를 다룬다.
+effort: medium
 allowed-tools: Read, Glob, Grep
 ---
 
@@ -33,7 +34,7 @@ allowed-tools: Read, Glob, Grep
 | 이름 | 필수 입력 | "이름을 입력해주세요" | 제출 시 |
 ```
 
-**검증 시점 가이드:**
+**검증 시점 가이드:** 실시간은 즉각 피드백이 UX에 중요한 항목(비밀번호 강도), 포커스 아웃은 서버 쿼리가 필요한 항목(이메일 중복 체크), 제출 시는 전체 폼을 한번에 검증해야 하는 항목.
 - **실시간 (타이핑 중)**: 비밀번호 강도, 글자 수 제한
 - **포커스 아웃 (필드 이탈)**: 이메일 형식, 중복 체크
 - **제출 시**: 필수값 누락, 서버 검증 필요한 항목

@@ -1,0 +1,9 @@
+{
+  "expectations": [
+    {"text": "my-update-check 스킬이 트리거됨", "passed": true, "evidence": "SKILL.md를 읽고 지침대로 수행함"},
+    {"text": "버전 비교를 수행함", "passed": true, "evidence": "claude --version + npm view 병렬 실행"},
+    {"text": "변경사항을 카테고리별로 분류함", "passed": true, "evidence": "⚠️/🔧/💡/✅ 4단계로 분류된 테이블 출력"},
+    {"text": "내 설정과 관련된 변경사항을 우선 표시함", "passed": true, "evidence": "직접 영향(blocklist 충돌) → 최적화 → 미활용 → 정상 순서"}
+  ],
+  "summary": {"total": 4, "passed": 4, "failed": 0, "pass_rate": 1.0}
+}

@@ -1,6 +1,7 @@
 ---
 name: frontend-design
-description: Use when building web UI, pages, dashboards, or landing pages. Enforces design thinking process, typography/color/motion guidelines, and prevents generic AI aesthetics.
+description: 웹 UI, 페이지, 대시보드, 랜딩페이지를 만들 때 사용. 디자인 씽킹, 타이포/컬러/모션 가이드라인 적용. AI slop 방지.
+effort: high
 allowed-tools: Read, Write, Edit, Glob, Grep
 ---
 
@@ -11,15 +12,23 @@ allowed-tools: Read, Write, Edit, Glob, Grep
 UI를 만들기 전에 반드시 미적 방향을 결정한다:
 
 1. **Purpose**: 이 인터페이스가 해결하는 문제는? 누가 사용하는가?
-2. **Tone**: 어떤 분위기인가? (미니멀, 럭셔리, 에디토리얼, 브루탈리즘, 레트로 등)
+2. **Tone**: 극단적 방향을 선택한다 — brutally minimal, maximalist chaos, retro-futuristic, organic/natural, luxury/refined, playful/toy-like, editorial/magazine, brutalist/raw, art deco/geometric, soft/pastel, industrial/utilitarian 등. 영감으로 참고하되 미적 방향에 충실한 자신만의 톤을 만든다.
 3. **Constraints**: 기술 요구사항 (프레임워크, 성능, 접근성)
 4. **Differentiation**: 이 디자인을 기억에 남게 만드는 단 하나의 것은?
 
 핵심: **의도성(intentionality)**이 중요하지, 강도(intensity)가 아니다. 대담한 맥시멀리즘과 정제된 미니멀리즘 모두 좋다 — 일관성 있게 실행하면 된다.
 
+## 구현 기준
+
+작동하는 코드(HTML/CSS/JS, React, Vue 등)를 만든다. 결과물은:
+- Production-grade이며 실제로 동작해야 한다
+- 시각적으로 강렬하고 기억에 남아야 한다
+- 명확한 미적 관점이 일관되게 관통해야 한다
+- 모든 디테일이 세심하게 다듬어져야 한다
+
 ## AI Slop 금지 목록
 
-AI가 반복적으로 선택하는 제네릭 패턴을 금지한다:
+AI는 학습 데이터에서 가장 빈번한 패턴을 기본값으로 선택한다. 그 결과 "AI가 만든 티"가 나는 제네릭한 결과물이 나온다. 독창성을 위해 이 기본값들을 의식적으로 피한다:
 
 ### 폰트 금지
 ```
@@ -65,7 +74,7 @@ Space Grotesk (AI가 자주 선택하는 폰트)
 
 ## 모션
 
-- **전략**: 잘 조율된 페이지 로드 애니메이션 1개 (animation-delay로 순차 reveal)가 산발적 마이크로 인터랙션 10개보다 낫다
+- **전략**: 잘 조율된 페이지 로드 애니메이션 1개가 산발적 마이크로 인터랙션 10개보다 낫다. 모션이 많으면 시선이 분산되고 성능도 떨어진다. 하나의 모션이 페이지 전체의 리듬을 만들어야 한다 (animation-delay로 순차 reveal)
 - HTML: CSS-only 솔루션 우선
 - React: Motion 라이브러리 (framer-motion) 사용
 - scroll-trigger와 hover 상태를 활용한다

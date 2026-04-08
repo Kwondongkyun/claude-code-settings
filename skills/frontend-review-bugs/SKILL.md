@@ -1,6 +1,7 @@
 ---
 name: frontend-review-bugs
-description: Use when reviewing React/Next.js code for logic errors, runtime bugs, and async issues. Covers null handling, condition errors, infinite loops, state management bugs, and type mismatches.
+description: React/Next.js 코드의 로직 에러, 런타임 버그, 비동기 이슈를 리뷰할 때 사용. null 처리, 조건 오류, 무한 루프, 상태 관리 버그, 타입 불일치.
+effort: medium
 allowed-tools: Read, Glob, Grep
 ---
 
@@ -73,7 +74,7 @@ useEffect(() => {
 점검 항목:
 - `async` 함수에서 `await` 누락
 - Promise 에러 미처리 (`.catch()` 또는 try-catch 없음)
-- 언마운트 후 상태 업데이트 (cleanup 누락)
+- 언마운트 후 상태 업데이트 → 메모리 누수는 frontend-review-performance에서 다룸. 여기선 cleanup 누락으로 인한 **런타임 에러**(setState on unmounted)만 점검
 - 병렬 가능한 요청의 순차 실행 (`Promise.all` 미활용)
 
 ## 무한 루프 / 무한 리렌더링
